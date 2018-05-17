@@ -7,21 +7,23 @@ class App extends Component {
     super(props);
     this.state = {
       currentUser: {name: "Bob"}, // optional. if currentUser is not defined, it means the user is Anonymous
-      messages: [
-        {
-          key: 1,
-          username: "Bob",
-          content: "Has anyone seen my marbles?",
-        },
-        {
-          key: 2,
-          username: "Anonymous",
-          content: "No, I think you lost them. You lost your marbles Bob. You lost them for good."
-        }
-      ]
+      messages: []
+
+      //   {
+      //     key: 1,
+      //     username: "Bob",
+      //     content: "Has anyone seen my marbles?",
+      //   },
+      //   {
+      //     key: 2,
+      //     username: "Anonymous",
+      //     content: "No, I think you lost them. You lost your marbles Bob. You lost them for good."
+      //   }
+      // ]
     };
 
     this.onNewMessage = this.onNewMessage.bind(this);
+    this.onNewUser = this.onNewUser.bind(this);
   }
 
   // GenerateMessageKey(){
@@ -33,17 +35,16 @@ class App extends Component {
   componentDidMount() {
     //console.log("componentDidMount <App />");
     this.socket = new WebSocket('ws://localhost:3001');
-    console.log(this.socket.readyState === 0 );
     this.socket.addEventListener('open', (event) => {
       console.log('Connect to Server');
     });
-    // this.socket.addEventListener('message', (messageEvent) => {
-    //   console.log('Connected to Server');
-    //   const messageObject = JSON.parse(messageEvent.data);
-    //   this.setState({
-    //     messages: [...this.state.messages, messageObject],
-    //   })
-    // });
+    this.socket.addEventListener('message', (messageEvent) => {
+      const messageObject = JSON.parse(messageEvent.data);
+      console.log("received messge on client side: ",messageObject);
+      this.setState({
+        messages: [...this.state.messages, messageObject],
+      });
+    });
     // setTimeout(() => {
     //   console.log("Simulating incoming message");
     //   // Add a new message to the list of messages in the data store
@@ -55,9 +56,16 @@ class App extends Component {
     // }, 3000);
   }
   onNewMessage(newMassage){
-    const newMsge = {id: 3, username: "Michelle", content: newMassage};
+    const newMsge = { username: this.state.currentUser.name, content: newMassage};
     const messages = this.state.messages.concat(newMsge);
-    this.setState({messages: messages});
+    // this.setState({messages: messages});
+    this.socket.send(JSON.stringify(newMsge));
+    // this.socket.send(newMassage);
+  }
+
+  onNewUser(newUser){
+    const newCurrentUser = {name: newUser}
+    this.setState({currentUser: newCurrentUser});
   }
 
   render() {
@@ -66,8 +74,8 @@ class App extends Component {
         <nav className="navbar">
           <a href="/" className="navbar-brand">Chatty</a>
         </nav>
-        <MessageList Messages={this.state.messages}/>
-        <ChatBar currentUser={this.state.currentUser.name} onNewMessage={this.onNewMessage}/>
+        <MessageList Messages={this.state.messages} />
+        <ChatBar currentUser={this.state.currentUser.name} onNewMessage={this.onNewMessage} onNewUser={this.onNewUser} />
         </div>
       );
   }
