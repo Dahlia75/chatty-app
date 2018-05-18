@@ -52,6 +52,8 @@ body {
   color: red;
   font-style: italic;
   padding: 5px 20px;
+  align-items: center;
+  justify-content: center;
 }
 
 .message-content,
@@ -69,6 +71,16 @@ body {
   flex: 2;
   font-weight: 700;
   color: black;
+}
+
+.message-image{
+  height: 60vh;
+  width: 60vw;
+  /*display: block;*/
+  /*align-items: center;*/
+  /*justify-content: center;*/
+  /*margin-left: auto;*/
+  /*margin-right: auto;*/
 }
 
 .navbar {

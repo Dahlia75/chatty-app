@@ -22,7 +22,6 @@ class App extends Component {
     });
     this.socket.addEventListener('message', (messageEvent) => {
       const messageObject = JSON.parse(messageEvent.data);
-      console.log("received messge on client side: ",messageObject);
       if (messageObject.type === 'usersCount'){
         this.setState({
           noOfClients: messageObject.content,
@@ -47,7 +46,6 @@ class App extends Component {
       type: 'postNotification',
       content: `*** User ${this.state.currentUser.name} has changed his name to User ${newUser}. ***`,
     }
-    console.log("notification message: ", notificationMsg);
     const newCurrentUser = {name: newUser};
     this.setState({currentUser: newCurrentUser});
     this.socket.send(JSON.stringify(notificationMsg));

@@ -9,7 +9,6 @@ class ChatBar extends Component {
 
   handleKeyPress(event) {
     if (event.key === 'Enter') {
-      console.log(event.target.value);
       this.props.onNewMessage(event.target.value);
       event.target.value = '';
     }
@@ -18,7 +17,6 @@ class ChatBar extends Component {
 
   userKeyPress(event) {
     if (event.key === 'Enter') {
-      console.log('user key press', event.target.value);
       this.props.onNewUser(event.target.value);
     }
   }

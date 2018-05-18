@@ -18,13 +18,12 @@ const wss = new SocketServer.Server({ server });
 // the ws parameter in the callback.
 wss.on('connection', (ws) => {
   const userColor = getRandomColor();
-  console.log('Client connected',  wss.clients.size);
   getUsersCount();
 
   ws.on('message', function incoming(message) {
     const recievedMessage = JSON.parse(message);
-    console.log("Server side received: ",message);
-   let messageObject={};
+    let messageObject={};
+    //Check the type of the message from the server
     if(recievedMessage.type === 'postMessage'){
        messageObject = {
         id: uuidv1(),
@@ -40,27 +39,26 @@ wss.on('connection', (ws) => {
         content: recievedMessage.content,
       }
     };
-    console.log("messageObject: ", messageObject);
     wss.broadcast(JSON.stringify(messageObject));
   });
 
   // Set up a callback for when a client closes the socket. This usually means they closed their browser.
   ws.on('close', () => {
     console.log('Client disconnected');
-    getUsersCount();});
+    getUsersCount();
+  });
 });
 
+//Send messages to all connected users
 wss.broadcast = function broadcast(data) {
   wss.clients.forEach(function each(client) {
-  console.log("Server side going to send data: ",data);
-    console.log(client.readyState);
     if (client.readyState === SocketServer.OPEN) {
-      console.log("Server side sending data: ",data);
       client.send(data);
     }
   });
 };
 
+//Create a color to user name
 function getRandomColor() {
   var letters = '0123456789ABCDEF';
   var color = '#';
@@ -70,6 +68,7 @@ function getRandomColor() {
   return color;
 }
 
+//Get number of connected users
 function getUsersCount(){
     const messageObject = {
     type: 'usersCount',
