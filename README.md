@@ -15,7 +15,7 @@ A chat website app to talk to freinds and broadcast messages to all online users
 
 ### Usage
 
-Clone the boilerplate and create your own git repo.
+Clone the webApp:
 
 ```
 git clone git@github.com:Dahlia75/chatty-app.git
