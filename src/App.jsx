@@ -6,7 +6,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentUser: {name: "Bob"},
+      currentUser: {name: 'Bob'},
       messages: [],
       noOfClients: 0,
     };
@@ -37,7 +37,7 @@ class App extends Component {
     const newMsge = { type: 'postMessage',
                       username: this.state.currentUser.name,
                       content: newMassage};
-    const messages = this.state.messages.concat(newMsge);
+    this.state.messages.concat(newMsge);
     this.socket.send(JSON.stringify(newMsge));
   }
 

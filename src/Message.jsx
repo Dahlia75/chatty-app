@@ -18,14 +18,12 @@ class Message extends Component {
         return acc;
       }, []);
       const multipleComponents = splitMsg.map(function(item, index) {
-        console.log("item: ", item);
         if (imageCheck.test(item)) {
           return <img className="message-image" key={index} src={item} />
         } else {
           return <span className="message-content" key={index} >{item}</span>
         }
       });
-      console.log("split: ", multipleComponents);
       return multipleComponents;
     } else {
       return <span className="message-content">{this.props.singleMessage.content}</span>
@@ -35,7 +33,7 @@ class Message extends Component {
   render() {
     var msg;
     switch(this.props.singleMessage.type){
-      case "incomingMessage":
+      case 'incomingMessage':
         const msgContent = this.checkImageInMsg();
         let style = {color: this.props.singleMessage.userColor};
 
@@ -47,7 +45,7 @@ class Message extends Component {
             </div>
           </div>);
         break;
-      case "incomingNotification":
+      case 'incomingNotification':
         msg = (
           <div className="notification">
             <span className="notification-content message system">{this.props.singleMessage.content}</span>

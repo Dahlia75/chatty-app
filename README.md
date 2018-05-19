@@ -18,8 +18,8 @@ A chat website app to talk to freinds and broadcast messages to all online users
 Clone the boilerplate and create your own git repo.
 
 ```
-git clone git@github.com:lighthouse-labs/react-simple-boilerplate.git
-cd react-simple-boilerplate
+git clone git@github.com:Dahlia75/chatty-app.git
+cd chatty-app.git
 git remote rm origin
 git remote add origin [YOUR NEW REPOSITORY]
 ```
@@ -31,15 +31,6 @@ npm install
 npm start
 open http://localhost:3000
 ```
-
-### Linting
-
-This boilerplate project includes React ESLint configuration.
-
-```
-npm run lint
-```
-
 ### Dependencies
 
 babel-core
