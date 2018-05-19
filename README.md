@@ -5,13 +5,13 @@ A chat website app to talk to freinds and broadcast messages to all online users
 
 ## Final Product
 
-!["Screenshot of changing user name"]()
+!["Screenshot of changing user name"](https://github.com/Dahlia75/chatty-app/blob/master/docs/change-name.png?raw=true)
 
-!["Screenshot of sending image"]()
+!["Screenshot of sending image"](https://github.com/Dahlia75/chatty-app/blob/master/docs/add-image-in-text.png?raw=true)
 
-!["Screenshot for how the image will be shown in second user browser"]()
+!["Screenshot for how the image will be shown on second user browser"](https://github.com/Dahlia75/chatty-app/blob/master/docs/image-in-2nd-user.png?raw=true)
 
-!["Screenshot of sending text with image"]()
+!["Screenshot of sending text with image"](https://github.com/Dahlia75/chatty-app/blob/master/docs/text-with-image.png?raw=true)
 
 ### Usage
 
